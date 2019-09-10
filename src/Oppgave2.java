@@ -2,37 +2,25 @@ import java.util.NoSuchElementException;
 
 public class Oppgave2 {
 
+    public static int antallUlikeSorter(int[] a){
 
-    public static int ombyttinger (int[] a){
-
-        if(a.length == 0){
-            throw new NoSuchElementException("Tabellen er tom");
+        int antallUlike = 0;
+        if (a.length == 0){
+            return antallUlike;
         }
-
-        int temp = 0;
-        int hjelpevariabel = 0;
 
         for(int i = 0; i<a.length-1; i++){
-            if(a[i]>a[i+1]){
-                temp = a[i];
-                a[i] = a[i+1];
-                a[i+1] = temp;
-                hjelpevariabel++;
+            if(a[i] > a[i+1]){
+                throw new IllegalStateException("Tabellen er ikke sortert stigende");
             }
-        }
+            else if(a[i] < a[i+1]){
+                antallUlike++;
+            }
 
-        int maks = a[a.length-1];
-        return hjelpevariabel;
+            //Hvordan ta hensyn til om de er like?
+        }
+        return antallUlike;
     }
 
-
-    /*
-    - Indikasjon på hvor mange det blir i gjennomsnitt.
-      Er metoden maks bedre(eller dårligere) enn de maks-metodene
-      vi har sett på tidligere?
-
-
-
-     */
 
 }
