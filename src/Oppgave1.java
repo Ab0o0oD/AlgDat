@@ -33,9 +33,11 @@ public class Oppgave1 {
 
     - Hvor mange blir det i gjennomsnitt?
 
-
         Hvor mange operasjoner det blir i gjennomsnitt:
         12+12n+9*log(n)-0,423
+
+        I gjennomsnitt antall a[i]>a[i+1] er sann,
+        altså hvor mange ombyttinger i gjennomsnitt: log(n)-0,423
 
      */
 
@@ -46,19 +48,19 @@ public class Oppgave1 {
         }
 
         int temp = 0;
-        int hjelpevariabel = 0;
+        int antallOmbyttinger = 0;
 
         for(int i = 0; i<a.length-1; i++){
             if(a[i]>a[i+1]){
                 temp = a[i];
                 a[i] = a[i+1];
                 a[i+1] = temp;
-                hjelpevariabel++;
+                antallOmbyttinger++;   //Hvorfor blir det en for lite?
             }
         }
 
         int maks = a[a.length-1];
-        return hjelpevariabel;
+        return antallOmbyttinger;
     }
 
 
@@ -67,7 +69,8 @@ public class Oppgave1 {
       Er metoden maks bedre(eller dårligere) enn de maks-metodene
       vi har sett på tidligere?
 
-
+        Mindre effektiv da den har flere antall operasjoner:
+        12+12n+9*log(n)-0,423 
 
      */
 
