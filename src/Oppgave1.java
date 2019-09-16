@@ -55,7 +55,7 @@ public class Oppgave1 {
                 temp = a[i];
                 a[i] = a[i+1];
                 a[i+1] = temp;
-                antallOmbyttinger++;   //Hvorfor blir det en for lite?
+                antallOmbyttinger++;  
             }
         }
 
@@ -70,7 +70,7 @@ public class Oppgave1 {
       vi har sett på tidligere?
 
         Mindre effektiv da den har flere antall operasjoner:
-        12+12n+9*log(n)-0,423 
+        12+12n+9*log(n)-0,423
 
      */
 
