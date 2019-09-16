@@ -22,36 +22,28 @@ public class Oppgave4 {
 
     public static void delsortering(int[] a){
 
-        //Forsøk på å sortere tabellen før jeg deler den opp i partall og oddetall
-        int m = 0;
-
-        for(int i = 1; i < a.length; i++) { //starter nest bakerst
-            if (a[i] > a[m]) { //indeksen oppdateres
-                m = i;
-            }
-        }
-
-        int partall = 0;
-        int oddetall = 0;
-        int m2 = (0 + a.length) / 2;         //prøver å lage en skille i midten
 
 
-        for(int j = 0; j < a.length; j++){  //løper gjennom arrayet
-            if(a[j] % 2 != 0){              //hvis det er rest skal den plasseres i oddetall hjelpevariavel?
+
+        int partall;
+        int oddetall;
+        int m = (0 + a.length) / 2;
+
+
+        for(int j = 0; j < a.length; j++){
+            if(a[j] % 2 != 0){
                 oddetall = a[j];
-                oddetall++;                 //legger til alle tallene som er oddetall?
-                System.out.println(oddetall);
+                oddetall++;
+                oddetall = a[m+a.length];
+                System.out.println(oddetall+" ");
             }
-            else {                          //hvis det er partall skal det plasseres i partall variabelen
+
+            else {
                 partall = a[j];
-                partall++;                  //legger til alle tallene som er partall?
+                partall++;
+                partall = a[a.length+m-1];
                 System.out.println(partall+" ");
             }
-
-            //Hvordan dele tabellen i to?
-            oddetall = a[m2+a.length];       //forsøk på å bestemme at venstre del av tabellen skal ha partall og andre skal ha oddetall
-            partall = a[a.length+m2-1];
-
         }
     }
 }
