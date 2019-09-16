@@ -22,14 +22,11 @@ public class Oppgave4 {
 
     public static void delsortering(int[] a){
 
-        int temp = 0;
-
-        for(int i = 0; i<a.length-1; i++){
-            if(a[i]>a[i+1]){
-                temp = a[i];
-                a[i] = a[i+1];
-                a[i+1] = temp;
-            }
+        for (int i=1;i<a.length;i++) {
+            int verdi = a[i], j = i - 1;
+            for (; j >= 0 && verdi < a[j]; j--)
+                a[j+1] = a[j];
+            a[j + 1] = verdi;
         }
 
         int oddetall = 0;
