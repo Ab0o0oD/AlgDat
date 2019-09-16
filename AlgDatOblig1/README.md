@@ -15,5 +15,5 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 * Synne har hatt hovedansvar for oppgave 1 og 2.
 * Nikola har hatt hovedansvar for oppgave 4.
 * Julie har hatt hovedansvar for oppgave *
-*
+* 
 
