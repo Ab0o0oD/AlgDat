@@ -55,7 +55,7 @@ public class Oppgave1 {
                 temp = a[i];
                 a[i] = a[i+1];
                 a[i+1] = temp;
-                antallOmbyttinger++;  
+                antallOmbyttinger++;
             }
         }
 
