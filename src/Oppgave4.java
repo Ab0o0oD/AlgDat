@@ -22,27 +22,26 @@ public class Oppgave4 {
 
     public static void delsortering(int[] a){
 
-        for (int i=1;i<a.length;i++) {
-            int verdi = a[i], j = i - 1;
-            for (; j >= 0 && verdi < a[j]; j--)
-                a[j+1] = a[j];
-            a[j + 1] = verdi;
+        int temp = 0;
+
+        for(int i = 0; i<a.length-1; i++){
+            if(a[i]>a[i+1]){
+                temp = a[i];
+                a[i] = a[i+1];
+                a[i+1] = temp;
+            }
         }
 
-        int partall = 0;
         int oddetall = 0;
+        int partall = 0;
         int m = (0 + a.length) / 2;         //prøver å lage en skille i midten
 
-
-        for(int j = 0; j < a.length; j++){  //løper gjennom arrayet
+        for(int j = 0; j < a.length; j++){
             if(a[j] % 2 != 0){              //hvis det er rest skal den plasseres i oddetall hjelpevariavel?
-                oddetall = a[j];
-                oddetall = a[m+a.length];   //a[m:a.length] --> lukket intervall
+                oddetall = 0;
             }
-
-            else {                          //hvis det er partall skal det plasseres i partall hjelpevariabelen
-                partall = a[j];
-                partall = a[+m-1];         //a[a.length:m> --> halvåpent intervall
+            else {
+                partall = 0;
             }
         }
     }
