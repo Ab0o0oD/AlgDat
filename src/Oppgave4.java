@@ -5,25 +5,6 @@ public class Oppgave4 {
 
     /**
      * Nikola
-     * <p>
-     * Oppgavetekst
-     * <p>
-     * Lag metoden ​public​ ​static​ ​void​ ​delsortering​(​int​[] a)​. Den skal dele parametertabellen ​a​ i to sorterte deler.
-     * Venstre del skal inneholde oddetallene sortert og høyre del partallene sortert.
-     * Flg. eksempel viser hvordan den skal virke:
-     * <p>
-     * ​int​[] a = {6,10,9,4,1,3,8,5,2,7};
-     * delsortering(a);
-     * System.​out​.println(Arrays.​toString​(a));
-     * // Utskrift: [1, 3, 5, 7, 9, 2, 4, 6, 8, 10]
-     * <p>
-     * Tabellen ​a​ kan være tom (det er ingen feilsituasjon), inneholde både negative og positive tall,
-     * kun oddetall eller kun partall. ​Metoden skal ikke bruke hjelpetabeller​. Men en eller flere
-     * hjelpevariabler kan inngå. Lag den så effektiv som mulig.
-     */
-
-
-    /**
      * OPPGAVE 4
      *
      * Lag metoden ​public​ ​static​ ​void​ ​delsortering​(​int​[] a)​. Den skal dele parametertabellen ​a​ i to sorterte deler.
