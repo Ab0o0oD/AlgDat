@@ -7,7 +7,6 @@ Oppgaven er levert av følgende studenter:
 * Nikola Sekiw, s333975, s333975@oslomet.no
 * Julie Solvin Jacobsen, s341887, s341887@oslomet.no
 *  Abdulrazak Kanjo  ,  s331393 , s331393@oslomet.no
-............
 
 # Arbeidsfordeling
 
