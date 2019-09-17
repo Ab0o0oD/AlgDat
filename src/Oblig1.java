@@ -162,45 +162,8 @@ public class Oblig1 {
 
     ///// Oppgave 4 //////////////////////////////////////
 
-
-    private static void kvikksortering0(int[] a, int v, int h)  // en privat metode
-    {
-        if (v >= h) return;  // a[v:h] er tomt eller har maks ett element
-        int k = sParter0(a, v, h, (v + h)/2);  // bruker midtverdien
-        kvikksortering0(a, v, k - 1);     // sorterer intervallet a[v:k-1]
-        kvikksortering0(a, k + 1, h);     // sorterer intervallet a[k+1:h]
-    }
-
-    public static void kvikksortering(int[] a, int fra, int til) // a[fra:til>
-    {
-        fratilKontroll(a.length, fra, til);  // sjekker når metoden er offentlig
-        kvikksortering0(a, fra, til - 1);  // v = fra, h = til - 1
-    }
-
-    public static void kvikksortering(int[] a)   // sorterer hele tabellen
-    {
-        kvikksortering0(a, 0, a.length - 1);
-    }
-
-
-
-
-    private static int sParter0(int[] a, int v, int h, int indeks) {
-        bytt(a, indeks, h);                         // skilleverdi a[indeks] flyttes bakerst
-        int pos = sParter0(a, v, h - 1, a[h]);  // partisjonerer a[v:h − 1]
-        bytt(a, pos, h);                           // bytter for å få skilleverdien på rett plass
-        return pos;                                // returnerer posisjonen til skilleverdien
-
-    }
-
-    public static void bytt(int[] a, int i, int j) { //returnerer ny tabell hver gang den kalles
-        int temp = a[i];
-        a[i] = a[j];
-        a[j] = temp;
-    }
-
-
     public static void delsortering(int[] a) {
+
         if(a.length == 0) {
             return;
         }
@@ -243,9 +206,22 @@ public class Oblig1 {
             }
 
             //Quicksortering
-            kvikksortering(a, 0, antallOddetall-1);
-            kvikksortering(a, antallOddetall, a.length-1);
+            utvalgssortering4(a, 0, antallOddetall);
+            utvalgssortering4(a, antallOddetall, a.length);
         }
+    }
+    public static void utvalgssortering4(int[] a, int fra, int til) {
+        fratilKontroll(a.length, fra, til);
+
+        for (int i = fra; i < til - 1; i++) {
+            bytt(a, i, min(a, i, til));  // to hjelpemetoder
+        }
+    }
+
+    public static void bytt(int[] a, int i, int j) { //returnerer ny tabell hver gang den kalles
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
     }
     public static void sortering(int[] a) {
         for (int i = a.length; i > 1; i--) {
@@ -253,6 +229,7 @@ public class Oblig1 {
             bytt( a, i - 1, m );
         }
     }
+
     public static int maks(int[] a, int fra, int til) {
 
         if (a == null) throw new NullPointerException
@@ -274,6 +251,8 @@ public class Oblig1 {
 
         return m;  // posisjonen til største verdi i a[fra:til>
     }
+
+
     ///// Oppgave 5 //////////////////////////////////////
     public static void rotasjon(char[] a) {
 
@@ -428,7 +407,7 @@ public class Oblig1 {
 
         int[] førsteTreiA = Arrays.copyOfRange(a,0,3);
 
-        int[]    index = Oppgave8.indekssortering(førsteTreiA);
+        int[]    index = indekssortering(førsteTreiA);
 
 
         int m = index[0];
