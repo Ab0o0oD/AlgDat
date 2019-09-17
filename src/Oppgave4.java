@@ -45,13 +45,13 @@ public class Oppgave4 {
 
         //forsøk på å sortere oddetallene hvis det KUN er de som er i tabellen
         if (a.length == antallOddetall) {
-            kvikksortering(a, 0, a.length-1);
+            sortering(a);
         }
 
 
         //forsøk på å sortere oddetallene hvis det KUN er de som er i tabellen
         else if (a.length == antallPartall) {
-            kvikksortering(a, 0, a.length-1);
+            kvikksortering(a);
         }
 
         else{
@@ -68,6 +68,33 @@ public class Oppgave4 {
             kvikksortering(a, 0, antallOddetall-1);
             kvikksortering(a, antallOddetall, a.length-1);
         }
+    }
+    public static void sortering(int[] a) {
+        for (int i = a.length; i > 1; i--) {
+            int m = maks( a, 0, i );
+            bytt( a, i - 1, m );
+        }
+    }
+    public static int maks(int[] a, int fra, int til) {
+
+        if (a == null) throw new NullPointerException
+                ( "parametertabellen a er null!" );
+
+        fratilKontroll( a.length, fra, til );
+
+        if (fra == til) throw new NoSuchElementException
+                ( "fra(" + fra + ") = til(" + til + ") - tomt tabellintervall!" );
+
+        int m = fra;             // indeks til største verdi i a[fra:til>
+        int maksverdi = a[fra];  // største verdi i a[fra:til>
+
+        for (int i = fra + 1; i < til; i++)
+            if (a[i] > maksverdi) {
+                m = i;               // indeks til største verdi oppdateres
+                maksverdi = a[m];    // største verdi oppdateres
+            }
+
+        return m;  // posisjonen til største verdi i a[fra:til>
     }
 
     private static void kvikksortering0(int[] a, int v, int h)  // en privat metode

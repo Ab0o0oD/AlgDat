@@ -161,10 +161,119 @@ public class Oblig1 {
 
 
     ///// Oppgave 4 //////////////////////////////////////
-    public static void delsortering(int[] a) {
-        throw new NotImplementedException();
+
+
+    private static void kvikksortering0(int[] a, int v, int h)  // en privat metode
+    {
+        if (v >= h) return;  // a[v:h] er tomt eller har maks ett element
+        int k = sParter0(a, v, h, (v + h)/2);  // bruker midtverdien
+        kvikksortering0(a, v, k - 1);     // sorterer intervallet a[v:k-1]
+        kvikksortering0(a, k + 1, h);     // sorterer intervallet a[k+1:h]
     }
 
+    public static void kvikksortering(int[] a, int fra, int til) // a[fra:til>
+    {
+        fratilKontroll(a.length, fra, til);  // sjekker når metoden er offentlig
+        kvikksortering0(a, fra, til - 1);  // v = fra, h = til - 1
+    }
+
+    public static void kvikksortering(int[] a)   // sorterer hele tabellen
+    {
+        kvikksortering0(a, 0, a.length - 1);
+    }
+
+
+
+
+    private static int sParter0(int[] a, int v, int h, int indeks) {
+        bytt(a, indeks, h);                         // skilleverdi a[indeks] flyttes bakerst
+        int pos = sParter0(a, v, h - 1, a[h]);  // partisjonerer a[v:h − 1]
+        bytt(a, pos, h);                           // bytter for å få skilleverdien på rett plass
+        return pos;                                // returnerer posisjonen til skilleverdien
+
+    }
+
+    public static void bytt(int[] a, int i, int j) { //returnerer ny tabell hver gang den kalles
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+
+
+    public static void delsortering(int[] a) {
+        if(a.length == 0) {
+            return;
+        }
+
+        int antallPartall = 0;
+        int antallOddetall = 0;
+        int teller = 0;
+        int temp = 0;
+
+
+        //teller antall partall og oddetall
+        for(int i = 0; i<a.length; i++){
+            if(a[i] % 2 == 0) {
+                antallPartall++;
+            }
+            else {
+                antallOddetall++;
+            }
+        }
+
+        //forsøk på å sortere oddetallene hvis det KUN er de som er i tabellen
+        if (a.length == antallOddetall) {
+            sortering(a);
+        }
+
+
+        //forsøk på å sortere oddetallene hvis det KUN er de som er i tabellen
+        else if (a.length == antallPartall) {
+            sortering(a);
+        }
+
+        else{
+            for(int i = 0; i<a.length; i++){  //hvis det er oddetall skal den legge tallet som opprinnelig var der om temp og den bytter plass med partall???
+                if(a[i] % 2 != 0){              //hvis den finner oddetall, så.....
+                    temp = a[teller];           //teller er først 0 (det er plassen der det første oddetallet skal være
+                    a[teller] = a[i];           //når den finner oddetall går tallet (a[i]) det første oddetallet til teller (indeksen den skal ligge på)
+                    a[i] = temp;                //da blir oddetallet lik temp (teller 0)
+                    teller++;                   //så går man videre i arrayet til teller = 1 (2 tallet i arrayet) og finner det andre oddetallet og setter det der, osv osv.
+                }
+            }
+
+            //Quicksortering
+            kvikksortering(a, 0, antallOddetall-1);
+            kvikksortering(a, antallOddetall, a.length-1);
+        }
+    }
+    public static void sortering(int[] a) {
+        for (int i = a.length; i > 1; i--) {
+            int m = maks( a, 0, i );
+            bytt( a, i - 1, m );
+        }
+    }
+    public static int maks(int[] a, int fra, int til) {
+
+        if (a == null) throw new NullPointerException
+                ( "parametertabellen a er null!" );
+
+        fratilKontroll( a.length, fra, til );
+
+        if (fra == til) throw new NoSuchElementException
+                ( "fra(" + fra + ") = til(" + til + ") - tomt tabellintervall!" );
+
+        int m = fra;             // indeks til største verdi i a[fra:til>
+        int maksverdi = a[fra];  // største verdi i a[fra:til>
+
+        for (int i = fra + 1; i < til; i++)
+            if (a[i] > maksverdi) {
+                m = i;               // indeks til største verdi oppdateres
+                maksverdi = a[m];    // største verdi oppdateres
+            }
+
+        return m;  // posisjonen til største verdi i a[fra:til>
+    }
     ///// Oppgave 5 //////////////////////////////////////
     public static void rotasjon(char[] a) {
 
