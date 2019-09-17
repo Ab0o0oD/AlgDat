@@ -48,8 +48,7 @@ public class Oppgave7 {
 
         int storstelength = 0;
 
-
-        for (int i = 0; i < s.length; i++) {
+        for (int i = 0; i < s.length; i++) { //finner største string length i s Arrayet
 
             if (s[i].length() > storstelength) {
 

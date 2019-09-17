@@ -5,8 +5,8 @@ Oppgaven er levert av følgende studenter:
 * Liv Ellingsen, s305483, s305483@oslomet.no
 * Synne Angell, s331153, s331153@oslomet.no
 * Nikola Sekiw, s333975, s333975@oslomet.no
-* Julie 
-
+* Julie Solvin Jacobsen, s341887, s341887@oslomet.no
+*Abdulrazak Kanjo  ,  s331393 , s331393@oslomet.no
 
 # Arbeidsfordeling
 
@@ -14,6 +14,6 @@ I oppgaven har vi hatt følgende arbeidsfordeling:
 * Liv har hatt hovedansvar for oppgave 3 og 10. 
 * Synne har hatt hovedansvar for oppgave 1 og 2.
 * Nikola har hatt hovedansvar for oppgave 4.
-* Julie har hatt hovedansvar for oppgave *
-* 
+* Julie har hatt hovedansvar for oppgave 5 og 6
+* Abdulrazak har hatt hovedansvar for oppgave 7,8
 
