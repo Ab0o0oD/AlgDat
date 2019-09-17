@@ -13,7 +13,7 @@ Oppgaven er levert av følgende studenter:
 I oppgaven har vi hatt følgende arbeidsfordeling:
 * Liv har hatt hovedansvar for oppgave 3 og 10. 
 * Synne har hatt hovedansvar for oppgave 1 og 2.
-* Nikola har hatt hovedansvar for oppgave 4.
+* Nikola har hatt hovedansvar for oppgave 4 , 9
 * Julie har hatt hovedansvar for oppgave 5 og 6
 * Abdulrazak har hatt hovedansvar for oppgave 7,8
 
