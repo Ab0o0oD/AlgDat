@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Oppgave9 {
     public static int[] tredjeMin(int[] a) {
         int n = a.length;
@@ -6,14 +8,16 @@ public class Oppgave9 {
 
 
 
-        int[] indekssortering = Oppgave8.indekssortering(a);
+        int[] førsteTreiA = Arrays.copyOfRange(a,0,3);
 
-        int m = indekssortering[0];
-        int nm = indekssortering[1];
-        int nnm = indekssortering[2];
+            int[]    index = Oppgave8.indekssortering(førsteTreiA);
 
 
-        int førsteMinsteVerdi = a[m];
+        int m = index[0];
+        int nm = index[1];
+        int nnm = index[2];
+
+        int forsteMinsteVerdi = a[m];
         int andreMinsteVerdi = a[nm];
         int tredjeMinsteVerdi = a[nnm];
 
@@ -23,51 +27,49 @@ public class Oppgave9 {
 
                 if (a[i] < andreMinsteVerdi) {  //Hvis a[i] er mindre enn nestminste verdi så skal neste setning kjøres
 
-                    if (a[i] < førsteMinsteVerdi) {  //Hvis a[i] er mindre en minst verdi så skal ny verdi settes
+                    if (a[i] < forsteMinsteVerdi) {  //Hvis a[i] er mindre en minst verdi så skal ny verdi settes
 
                         nnm = nm;
-
                         tredjeMinsteVerdi = andreMinsteVerdi;
 
-
-
                         nm = m;
-
-                        andreMinsteVerdi = førsteMinsteVerdi;
-
-
+                        andreMinsteVerdi = forsteMinsteVerdi;
 
                         m = i;
-
-                        førsteMinsteVerdi = a[m];
+                        forsteMinsteVerdi = a[m];
 
                     } else {
 
                         nnm = nm;
-
                         tredjeMinsteVerdi = andreMinsteVerdi;
 
-
-
                         nm = i;
-
                         andreMinsteVerdi = a[nm];
 
                     }
 
                 } else {
 
-                    nnm = i;
-
-                    tredjeMinsteVerdi = a[nnm];
-
+                    nm = nnm;
+                    tredjeMinsteVerdi = a[nm];
                 }
 
-            }
+
+                    nnm = i;
+                    tredjeMinsteVerdi = a[nnm];
+                 }
 
         }
 
         return new int[]{m, nm, nnm};//returnerer tabell med inndekser
 
+    }
+
+    public static void main(String[] args) {
+        int [] a = {3, 7, 9, 8, 2, 4, 5, 6, 10, 1};
+           int [] b =tredjeMin(a);
+     for (int s=0 ;s< b.length ;s++ ) {
+            System.out.print(b[s]+ " ");
+        }
     }
 }

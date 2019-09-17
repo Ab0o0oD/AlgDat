@@ -123,9 +123,6 @@ public class Oppgave8 {
         }
         indekser[temp.length - 1] = maks;
 
-        for (int s : a) {
-            System.out.print( s + " " );
-        }
         return indekser;
     }
 }
