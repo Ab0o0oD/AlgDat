@@ -310,12 +310,12 @@ public class Oblig1 {
 
 
     ///// Oppgave 9 //////////////////////////////////////
+
+
     public static int[] tredjeMin(int[] a) {
         int n = a.length;
         if (n < 3) throw      // må ha minst to verdier
                 new java.util.NoSuchElementException("a.length(" + n + ") < 3!");
-
-
 
         int[] førsteTreiA = Arrays.copyOfRange(a,0,3);
 
@@ -339,49 +339,29 @@ public class Oblig1 {
                     if (a[i] < forsteMinsteVerdi) {  //Hvis a[i] er mindre en minst verdi så skal ny verdi settes
 
                         nnm = nm;
-
                         tredjeMinsteVerdi = andreMinsteVerdi;
 
-
-
                         nm = m;
-
                         andreMinsteVerdi = forsteMinsteVerdi;
 
-
-
                         m = i;
-
                         forsteMinsteVerdi = a[m];
 
                     } else {
-
                         nnm = nm;
-
                         tredjeMinsteVerdi = andreMinsteVerdi;
 
-
-
                         nm = i;
-
                         andreMinsteVerdi = a[nm];
 
                     }
-
                 } else {
 
-                    nm = i;
-
-                    andreMinsteVerdi = a[nm];
-
+                    nnm = i;
+                    tredjeMinsteVerdi = a[nnm];
                 }
 
-            }else {
-                nnm = i;
-
-                tredjeMinsteVerdi = a[nnm];
             }
-
         }
 
         return new int[]{m, nm, nnm};//returnerer tabell med inndekser

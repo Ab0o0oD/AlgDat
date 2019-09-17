@@ -1,12 +1,16 @@
 import java.util.Arrays;
 
 public class Oppgave9 {
+    public static void bytt(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+
     public static int[] tredjeMin(int[] a) {
         int n = a.length;
         if (n < 3) throw      // må ha minst to verdier
                 new java.util.NoSuchElementException("a.length(" + n + ") < 3!");
-
-
 
         int[] førsteTreiA = Arrays.copyOfRange(a,0,3);
 
@@ -39,7 +43,6 @@ public class Oppgave9 {
                         forsteMinsteVerdi = a[m];
 
                     } else {
-
                         nnm = nm;
                         tredjeMinsteVerdi = andreMinsteVerdi;
 
@@ -47,18 +50,13 @@ public class Oppgave9 {
                         andreMinsteVerdi = a[nm];
 
                     }
-
                 } else {
-
-                    nm = nnm;
-                    tredjeMinsteVerdi = a[nm];
-                }
-
 
                     nnm = i;
                     tredjeMinsteVerdi = a[nnm];
-                 }
+                }
 
+                 }
         }
 
         return new int[]{m, nm, nnm};//returnerer tabell med inndekser
@@ -67,6 +65,7 @@ public class Oppgave9 {
 
     public static void main(String[] args) {
         int [] a = {3, 7, 9, 8, 2, 4, 5, 6, 10, 1};
+
            int [] b =tredjeMin(a);
      for (int s=0 ;s< b.length ;s++ ) {
             System.out.print(b[s]+ " ");
