@@ -1,11 +1,13 @@
+package Oblig1;
 
+import Oblig1.Oblig1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 ////// Testprogram for Oblig 1 - 2019 ////////////////////////
 
 /*
-Testprogrammet har en main-metode som tester metodene i de 10 oppgavene.
+Testprogrammet har en Oblig1.main-metode som tester metodene i de 10 oppgavene.
 Som utgangspunkt er metodekallene kommentert vekk. Her må en passe på
 å bruke nøyaktig samme navn på metodene som det er bedt om i oppgaveteksten.
 
@@ -985,4 +987,4 @@ public class Oblig1Test {
         return a;                        // permutasjonen returneres
     }
 
-} // class Oblig1Test
+} // class Oblig1.Oblig1Test
