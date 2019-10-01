@@ -106,12 +106,16 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public int antall() {
-        throw new NotImplementedException();
+        return antall;
     }
 
     @Override
     public boolean tom() {
-        throw new NotImplementedException();
+        boolean tom = false;
+        if(antall() == 0){
+            tom = true;
+        }
+        return tom;
     }
 
     @Override
