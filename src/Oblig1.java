@@ -114,7 +114,6 @@ public class Oblig1 {
 
     ///// Oppgave 3 //////////////////////////////////////
 
-// Passerer testene i testfilen
 
     public static int antallUlikeUsortert(int[] a) {
 
@@ -139,14 +138,12 @@ public class Oblig1 {
             }
         }
 
-        System.out.println("Antall ulike er " + ulike);
         return ulike;
     }
 
 //    finnesFraFoer(int[], int, int) gaar gjennom arrayet fra start frem til elementet
 //    foer det tallet vi vurderer om er unikt, og gir true dersom det allerede finnes i
 //    listen og false dersom det ikke allerede finnes i listen.
-//    sjekke om denne allerede finnes i kode...:
 
     public static boolean finnesFraFoer(int[] a, int tall, int til){
 
@@ -462,7 +459,6 @@ public class Oblig1 {
 
     ///// Oppgave 10 //////////////////////////////////////
 
-    // Passerer testene i testfilen
 
     public static boolean inneholdt(String a, String b) {
 
