@@ -525,7 +525,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
 
-        for (int i = 0; i > liste.antall(); i++){
+        for (int i = 0; i < liste.antall(); i++){
 
             for (int j = 0; j < liste.antall(); j++) {
 
