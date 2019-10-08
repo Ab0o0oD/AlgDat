@@ -545,51 +545,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     }
 
-
-
-
-
-    public static void main(String[] args) {
-        String [] n = {"aa","bb","cc","dd",null};
-        DobbeltLenketListe<String> list1= new DobbeltLenketListe<>(  n);
-        System.out.println("liste1:\n"+list1.toString());
-        long tid = System.currentTimeMillis();
-        list1.nullstill();
-        tid = System.currentTimeMillis() - tid;
-        System.out.println("første nullstill metode bruker tid: "+tid);
-        System.out.println(list1.toString());
-        System.out.println("+++++++++++++++++++++++++++");
-
-        DobbeltLenketListe<String> list2= new DobbeltLenketListe<>(  n);
-        System.out.println("liste2:\n"+list2.toString());
-        long tid2 = System.currentTimeMillis();
-        list2.nullstill2();
-        tid2 = System.currentTimeMillis() - tid2;
-        System.out.println("andre nullstill metode bruker tid: "+tid2 );
-        System.out.println(list2.toString());
-    }
     @Override
-    public void nullstill() {
-
-        //første metode:
-        Node<T> p = hode;
-        Node<T> q;
-
-        while (p != null) {
-            q = p.neste;
-            p.verdi = null;
-            p.forrige = null;
-            p.neste = null;
-            p = q;
-        }
-
-        hode = hale = null;
-        antall = 0;
-        endringer++;
-
-
-    }
-    public void nullstill2 (){
+    public void nullstill (){
 
 
         Node<T> p = hode;
@@ -604,6 +561,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         endringer++;
 
     }
+
+
 
 
 } // class DobbeltLenketListe
