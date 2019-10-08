@@ -44,8 +44,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
       
   // hjelpemetode
-  private void indeksKontroll(int indeks)
-  {
+  private void indeksKontroll(int indeks) {
     if (indeks < 0)
     {
       throw new IndexOutOfBoundsException("Indeks " +
@@ -296,6 +295,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     @Override
     public T fjern(int indeks) {
 
+      indeksKontroll(indeks);
         Node<T> p = hode;
 
         if (antall == 1){
