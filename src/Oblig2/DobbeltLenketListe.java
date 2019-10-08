@@ -451,19 +451,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
 
-    public static void fratilKontroll(int antall, int fra, int til)
-    {
+    public static void fratilKontroll(int antall, int fra, int til) {
         if (fra < 0)                                  // fra er negativ
             throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") er negativ!");
 
-        if (til > antall)                          // til er utenfor tabellen
-            throw new​IndexOutOfBoundsException​
+        if (til > antall) {               // til er utenfor tabellen
+            throw new IndexOutOfBoundsException
                     ("til(" + til + ") > tablengde(" + antall + ")");
+        }
 
-        if (fra > antall)                                // fra er større enn til
-            throw new IndexOutOfBoundsException​
+        if (fra > antall) {                             // fra er større enn til
+            throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+        }
     }
 
 
