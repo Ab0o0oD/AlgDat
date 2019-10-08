@@ -143,8 +143,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
 
-    public Liste<T> subliste(int fra, int til){
-        throw new NotImplementedException();
+   public Liste<T> subliste(int fra, int til) {
+        fratilKontroll(antall, fra, til);
+        int antallElement = til - fra;
+        if(antallElement < 1) return new DobbeltLenketListe<>();
+
+        Node<T> current = finnNode(fra);
+
+        DobbeltLenketListe<T> subliste = new DobbeltLenketListe<>();
+
+        while(antallElement > 0) {
+            subliste.leggInn(current.verdi);
+            current = current.neste;
+            antallElement--;
+        }
+        return subliste;
     }
 
     @Override
