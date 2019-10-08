@@ -59,29 +59,31 @@ public class DobbeltLenketListe<T> implements Liste<T> {
   }
 
   // hjelpemetode
-  private Node<T> finnNode(int indeks)
-  {
-    Node<T> p;
 
-    if (indeks <= antall / 2)
-    {
-      p = hode;
-      for (int i = 0; i < indeks; i++)
-      {
-        p = p.neste;
+  private Node<T> finnNode(int indeks) {
+
+      Node<T> p;
+
+      if (indeks <= antall / 2) {
+          p = hode;
+
+          for (int i = 0; i < indeks; i++){
+              p = p.neste;
+          }
       }
-    }
-    else
-    {
-      p = hale;
-      for (int i = antall - 1; i > indeks; i--)
-      {
-        p = p.forrige;
+      else {
+          p = hale;
+          for (int i = antall - 1; i > indeks; i--){
+              p = p.forrige;
+          }
       }
-    }
-    return p;
+
+      return p;
   }
-    
+
+
+
+
     ////////////////////////////////////////////
     
 
@@ -432,8 +434,29 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     } // class DobbeltLenketListeIterator
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
-        throw new NotImplementedException();
+
+        for (int i = 0; i > liste.antall(); i++){
+
+            for (int j = 0; j < liste.antall(); j++) {
+
+
+                if ((c.compare(liste.hent(i), liste.hent(j))) < 0) {
+
+                    T venstre = liste.hent(i);
+                    T hoyre = liste.hent(j);
+
+
+                    liste.oppdater(i, hoyre);
+                    liste.oppdater(j, venstre);
+
+                }
+            }
+        }
+
     }
+
+
+
 
 } // class DobbeltLenketListe
 
