@@ -469,15 +469,20 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
     public Liste<T> subliste(int fra, int til) {
-
         fratilKontroll(antall, fra, til);
+        int antallElement = til - fra;
+        if(antallElement < 1) return new DobbeltLenketListe<>();
 
-        DobbeltLenketListe<T> liste = new DobbeltLenketListe<>(til - fra);
+        Node<T> current = finnNode(fra);
 
-        for (int i = fra, j = 0; i < til; i++, j++) liste.a[j] = a[i];
-        liste.antall = til - fra;
+        DobbeltLenketListe<T> subliste = new DobbeltLenketListe<>();
 
-        return liste;
+        while(antallElement > 0) {
+            subliste.leggInn(current.verdi);
+            current = current.neste;
+            antallElement--;
+        }
+        return subliste;
     }
 
 
