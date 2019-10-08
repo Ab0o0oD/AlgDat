@@ -42,6 +42,50 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     private int antall;            // antall noder i listen
     private int endringer;         // antall endringer i listen
 
+      
+  // hjelpemetode
+  private void indeksKontroll(int indeks)
+  {
+    if (indeks < 0)
+    {
+      throw new IndexOutOfBoundsException("Indeks " +
+        indeks + " er negativ!");
+    }
+    else if (indeks >= antall)
+    {
+      throw new IndexOutOfBoundsException("Indeks " +
+        indeks + " >= antall(" + antall + ") noder!");
+    }
+  }
+
+  // hjelpemetode
+  private Node<T> finnNode(int indeks)
+  {
+    Node<T> p;
+
+    if (indeks <= antall / 2)
+    {
+      p = hode;
+      for (int i = 0; i < indeks; i++)
+      {
+        p = p.neste;
+      }
+    }
+    else
+    {
+      p = hale;
+      for (int i = antall - 1; i > indeks; i--)
+      {
+        p = p.forrige;
+      }
+    }
+    return p;
+  }
+    
+    ////////////////////////////////////////////
+    
+
+    
     public DobbeltLenketListe() {
         //throw new NotImplementedException();
     }
