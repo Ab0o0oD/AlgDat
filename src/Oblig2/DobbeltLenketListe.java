@@ -142,7 +142,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
 
-    public Liste<T> subliste(int fra, int til) {
+
+   public Liste<T> subliste(int fra, int til) {
         fratilKontroll(antall, fra, til);
         int antallElement = til - fra;
         if(antallElement < 1) return new DobbeltLenketListe<>();
@@ -202,32 +203,41 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
+
         Objects.requireNonNull(verdi, "Null-verdier ikke tillatt.");
-        Node nyNode = new Node<>(verdi, null, null);
+        Node<T> nyNode = new Node<>(verdi, null, null);
 
-        if (indeks < 0 || indeks > antall) {
-            throw new IndexOutOfBoundsException("Indeks må være større enn 0 og mindre enn "+antall);
+        if (indeks < 0 || indeks > antall)
+        {
+            throw new IndexOutOfBoundsException("Indeks " +
+                    indeks + " er negativ!");
         }
-        else if (hode == null && hale == null){
+
+        else if (hode == null && hale == null)
+        {
             hode = nyNode;
             hale = nyNode;
         }
-        else if (hode.neste == null) {
-            hode.forrige = nyNode;
+        else if (indeks == 0)
+        {
             nyNode.neste = hode;
+            hode.forrige = nyNode;
             hode = nyNode;
+
         }
-        else if (indeks == antall) {
-            hale.neste = nyNode;
+        else if (indeks == antall)
+        {
             nyNode.forrige = hale;
+            hale.neste = nyNode;
             hale = nyNode;
         }
-        else {
+        else
+        {
             Node<T> nodeTilHøyre = finnNode(indeks);
-            Node<T> nodeTilVenstre = nodeTilHøyre.forrige;
-
-            nyNode.forrige = nodeTilVenstre;
+            nyNode.forrige = nodeTilHøyre.forrige;
             nyNode.neste = nodeTilHøyre;
+            nodeTilHøyre.forrige = nyNode;
+            nyNode.forrige.neste = nyNode;
         }
 
         antall++;
@@ -355,10 +365,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         return verdi;
     }
 
-    @Override
-    public void nullstill() {
-        throw new NotImplementedException();
-    }
 
     @Override
     public String toString() {
@@ -499,27 +505,25 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
 
-    public static void fratilKontroll(int antall, int fra, int til) {
+    public static void fratilKontroll(int antall, int fra, int til)
+    {
         if (fra < 0)                                  // fra er negativ
             throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") er negativ!");
 
-        if (til > antall) {               // til er utenfor tabellen
+        if (til > antall)                          // til er utenfor tabellen
             throw new IndexOutOfBoundsException
-                    ("til(" + til + ") > antall(" + antall + ")");
-        }
+                    ("til(" + til + ") > tablengde(" + antall + ")");
 
-        if (fra > antall) {                             // fra er større enn til
+        if (fra > antall)                                // fra er større enn til
             throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
-        }
     }
-
 
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
 
-        for (int i = 0; i < liste.antall(); i++){
+        for (int i = 0; i > liste.antall(); i++){
 
             for (int j = 0; j < liste.antall(); j++) {
 
@@ -542,6 +546,62 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
 
+
+    public static void main(String[] args) {
+        String [] n = {"aa","bb","cc","dd",null};
+        DobbeltLenketListe<String> list1= new DobbeltLenketListe<>(  n);
+        System.out.println("liste1:\n"+list1.toString());
+        long tid = System.currentTimeMillis();
+        list1.nullstill();
+        tid = System.currentTimeMillis() - tid;
+        System.out.println("første nullstill metode bruker tid: "+tid);
+        System.out.println(list1.toString());
+        System.out.println("+++++++++++++++++++++++++++");
+
+        DobbeltLenketListe<String> list2= new DobbeltLenketListe<>(  n);
+        System.out.println("liste2:\n"+list2.toString());
+        long tid2 = System.currentTimeMillis();
+        list2.nullstill2();
+        tid2 = System.currentTimeMillis() - tid2;
+        System.out.println("andre nullstill metode bruker tid: "+tid2 );
+        System.out.println(list2.toString());
+    }
+    @Override
+    public void nullstill() {
+
+        //første metode:
+        Node<T> p = hode;
+        Node<T> q;
+
+        while (p != null) {
+            q = p.neste;
+            p.verdi = null;
+            p.forrige = null;
+            p.neste = null;
+            p = q;
+        }
+
+        hode = hale = null;
+        antall = 0;
+        endringer++;
+
+
+    }
+    public void nullstill2 (){
+
+
+        Node<T> p = hode;
+        Node<T> q;
+        while (p.neste != null) {
+            q=p.neste;
+            fjern( 0 );
+            p = q;
+        }
+        hode = hale = null;
+        antall = 0;
+        endringer++;
+
+    }
 
 
 } // class DobbeltLenketListe
