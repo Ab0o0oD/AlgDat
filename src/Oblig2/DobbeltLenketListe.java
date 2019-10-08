@@ -228,8 +228,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     @Override
-    public T hent(int indeks) {
-        throw new NotImplementedException();
+    public T hent(int indeks)
+    {
+        indeksKontroll(indeks);
+
+        return finnNode(indeks).verdi;
     }
 
     @Override
@@ -247,8 +250,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
     }
 
     @Override
-    public T oppdater(int indeks, T nyverdi) {
-        throw new NotImplementedException();
+    public T oppdater(int indeks, T nyverdi)
+    {
+        indeksKontroll(indeks);
+
+        if (nyverdi == null) {
+            throw new NullPointerException("Ikke tillatt med null-verdier");
+        }
+
+        Node<T> p = finnNode(indeks);
+
+        T gammelverdi = p.verdi;
+        p.verdi = nyverdi;
+
+        endringer++;   // en endring i listen
+        return gammelverdi;
     }
 
     @Override
@@ -433,6 +449,37 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     } // class DobbeltLenketListeIterator
 
+
+
+    public static void fratilKontroll(int antall, int fra, int til)
+    {
+        if (fra < 0)                                  // fra er negativ
+            throw new IndexOutOfBoundsException
+                    ("fra(" + fra + ") er negativ!");
+
+        if (til > antall)                          // til er utenfor tabellen
+            throw new​IndexOutOfBoundsException​
+                    ("til(" + til + ") > tablengde(" + antall + ")");
+
+        if (fra > antall)                                // fra er større enn til
+            throw new IndexOutOfBoundsException​
+                    ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+    }
+
+
+    public Liste<T> subliste(int fra, int til) {
+
+        fratilKontroll(antall, fra, til);
+
+        DobbeltLenketListe<T> liste = new DobbeltLenketListe<>(til - fra);
+
+        for (int i = fra, j = 0; i < til; i++, j++) liste.a[j] = a[i];
+        liste.antall = til - fra;
+
+        return liste;
+    }
+
+
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
 
         for (int i = 0; i > liste.antall(); i++){
@@ -454,6 +501,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
     }
+
+
 
 
 
