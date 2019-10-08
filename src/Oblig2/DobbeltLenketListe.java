@@ -514,7 +514,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     ("fra(" + fra + ") er negativ!");
         if (fra > til)                                  // fra er negativ
             throw new IllegalArgumentException
-                    ("fra(" + fra + ") er negativ!");
+                    ("fra(" + fra + ") er større enn til!");
 
         if (til > antall)                          // til er utenfor tabellen
             throw new IndexOutOfBoundsException
