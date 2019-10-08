@@ -444,7 +444,43 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public void remove(){
-            //throw new NotImplementedException();
+            if (!fjernOK) throw
+                    new IllegalStateException("kan ikke fjernes uten å kalle next()");
+
+            if (iteratorendringer != endringer) throw
+                    new ConcurrentModificationException("liste er endret");
+
+            fjernOK = false;
+            Node<T> q = hode;
+
+            if (antall == 1)    // hvis det er bare en node i listen
+            {
+                hode = hale = null;
+            }
+            else if (denne == null)  // hvis den siste skal fjernes
+            {
+                q = hale;
+                hale = hale.forrige;
+                hale.neste = null;
+            }
+            else if (denne.forrige == hode)  // hvis den første skal fjernes
+            {
+                hode = hode.neste;
+                hode.forrige = null;
+            }
+            else
+            {
+                q = denne.forrige;  // q skal fjernes
+                q.forrige.neste = q.neste;
+                q.neste.forrige = q.forrige;
+            }
+
+            q.verdi = null;
+            q.forrige = q.neste = null;
+
+            antall--;
+            endringer++;
+            iteratorendringer++;
         }
 
     } // class DobbeltLenketListeIterator
@@ -458,11 +494,11 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                     ("fra(" + fra + ") er negativ!");
 
         if (til > antall)                          // til er utenfor tabellen
-            throw new​IndexOutOfBoundsException​
+            throw new IndexOutOfBoundsException
                     ("til(" + til + ") > tablengde(" + antall + ")");
 
         if (fra > antall)                                // fra er større enn til
-            throw new IndexOutOfBoundsException​
+            throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
     }
 
