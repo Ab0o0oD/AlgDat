@@ -190,32 +190,41 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
     @Override
     public void leggInn(int indeks, T verdi) {
+
         Objects.requireNonNull(verdi, "Null-verdier ikke tillatt.");
-        Node nyNode = new Node<>(verdi, null, null);
+        Node<T> nyNode = new Node<>(verdi, null, null);
 
-        if (indeks < 0 || indeks > antall) {
-            throw new IndexOutOfBoundsException("Indeks må være større enn 0 og mindre enn "+antall);
+        if (indeks < 0 || indeks > antall)
+        {
+            throw new IndexOutOfBoundsException("Indeks " +
+                    indeks + " er negativ!");
         }
-        else if (hode == null && hale == null){
+
+        else if (hode == null && hale == null)
+        {
             hode = nyNode;
             hale = nyNode;
         }
-        else if (hode.neste == null) {
-            hode.forrige = nyNode;
+        else if (indeks == 0)
+        {
             nyNode.neste = hode;
+            hode.forrige = nyNode;
             hode = nyNode;
+
         }
-        else if (indeks == antall) {
-            hale.neste = nyNode;
+        else if (indeks == antall)
+        {
             nyNode.forrige = hale;
+            hale.neste = nyNode;
             hale = nyNode;
         }
-        else {
+        else
+        {
             Node<T> nodeTilHøyre = finnNode(indeks);
-            Node<T> nodeTilVenstre = nodeTilHøyre.forrige;
-
-            nyNode.forrige = nodeTilVenstre;
+            nyNode.forrige = nodeTilHøyre.forrige;
             nyNode.neste = nodeTilHøyre;
+            nodeTilHøyre.forrige = nyNode;
+            nyNode.forrige.neste = nyNode;
         }
 
         antall++;
@@ -500,19 +509,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         if (fra > antall)                                // fra er større enn til
             throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
-    }
-
-
-    public Liste<T> subliste(int fra, int til) {
-
-        fratilKontroll(antall, fra, til);
-
-        DobbeltLenketListe<T> liste = new DobbeltLenketListe<>(til - fra);
-
-        for (int i = fra, j = 0; i < til; i++, j++) liste.a[j] = a[i];
-        liste.antall = til - fra;
-
-        return liste;
     }
 
 
