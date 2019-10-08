@@ -142,21 +142,9 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
 
-    public Liste<T> subliste(int fra, int til) {
-        fratilKontroll(antall, fra, til);
-        int antallElement = til - fra;
-        if(antallElement < 1) return new DobbeltLenketListe<>();
 
-        Node<T> current = finnNode(fra);
-
-        DobbeltLenketListe<T> subliste = new DobbeltLenketListe<>();
-
-        while(antallElement > 0) {
-            subliste.leggInn(current.verdi);
-            current = current.neste;
-            antallElement--;
-        }
-        return subliste;
+    public Liste<T> subliste(int fra, int til){
+        throw new NotImplementedException();
     }
 
     @Override
@@ -456,29 +444,76 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
         @Override
         public void remove(){
-            //throw new NotImplementedException();
+            if (!fjernOK) throw
+                    new IllegalStateException("kan ikke fjernes uten å kalle next()");
+
+            if (iteratorendringer != endringer) throw
+                    new ConcurrentModificationException("liste er endret");
+
+            fjernOK = false;
+            Node<T> q = hode;
+
+            if (antall == 1)    // hvis det er bare en node i listen
+            {
+                hode = hale = null;
+            }
+            else if (denne == null)  // hvis den siste skal fjernes
+            {
+                q = hale;
+                hale = hale.forrige;
+                hale.neste = null;
+            }
+            else if (denne.forrige == hode)  // hvis den første skal fjernes
+            {
+                hode = hode.neste;
+                hode.forrige = null;
+            }
+            else
+            {
+                q = denne.forrige;  // q skal fjernes
+                q.forrige.neste = q.neste;
+                q.neste.forrige = q.forrige;
+            }
+
+            q.verdi = null;
+            q.forrige = q.neste = null;
+
+            antall--;
+            endringer++;
+            iteratorendringer++;
         }
 
     } // class DobbeltLenketListeIterator
 
 
 
-    public static void fratilKontroll(int antall, int fra, int til) {
+    public static void fratilKontroll(int antall, int fra, int til)
+    {
         if (fra < 0)                                  // fra er negativ
             throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") er negativ!");
 
-        if (til > antall) {               // til er utenfor tabellen
+        if (til > antall)                          // til er utenfor tabellen
             throw new IndexOutOfBoundsException
                     ("til(" + til + ") > tablengde(" + antall + ")");
-        }
 
-        if (fra > antall) {                             // fra er større enn til
+        if (fra > antall)                                // fra er større enn til
             throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
-        }
     }
 
+
+    public Liste<T> subliste(int fra, int til) {
+
+        fratilKontroll(antall, fra, til);
+
+        DobbeltLenketListe<T> liste = new DobbeltLenketListe<>(til - fra);
+
+        for (int i = fra, j = 0; i < til; i++, j++) liste.a[j] = a[i];
+        liste.antall = til - fra;
+
+        return liste;
+    }
 
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
