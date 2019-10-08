@@ -142,7 +142,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
 
-
     public Liste<T> subliste(int fra, int til) {
         fratilKontroll(antall, fra, til);
         int antallElement = til - fra;
