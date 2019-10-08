@@ -142,9 +142,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
             }
         }
 
+    public Liste<T> subliste(int fra, int til) {
+        fratilKontroll(antall, fra, til);
+        int antallElement = til - fra;
+        if(antallElement < 1) return new DobbeltLenketListe<>();
 
-    public Liste<T> subliste(int fra, int til){
-        throw new NotImplementedException();
+        Node<T> current = finnNode(fra);
+
+        DobbeltLenketListe<T> subliste = new DobbeltLenketListe<>();
+
+        while(antallElement > 0) {
+            subliste.leggInn(current.verdi);
+            current = current.neste;
+            antallElement--;
+        }
+        return subliste;
     }
 
     @Override
@@ -487,33 +499,22 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
 
-    public static void fratilKontroll(int antall, int fra, int til)
-    {
+    public static void fratilKontroll(int antall, int fra, int til) {
         if (fra < 0)                                  // fra er negativ
             throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") er negativ!");
 
-        if (til > antall)                          // til er utenfor tabellen
+        if (til > antall) {               // til er utenfor tabellen
             throw new IndexOutOfBoundsException
-                    ("til(" + til + ") > tablengde(" + antall + ")");
+                    ("til(" + til + ") > antall(" + antall + ")");
+        }
 
-        if (fra > antall)                                // fra er større enn til
+        if (fra > antall) {                             // fra er større enn til
             throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+        }
     }
 
-
-    public Liste<T> subliste(int fra, int til) {
-
-        fratilKontroll(antall, fra, til);
-
-        DobbeltLenketListe<T> liste = new DobbeltLenketListe<>(til - fra);
-
-        for (int i = fra, j = 0; i < til; i++, j++) liste.a[j] = a[i];
-        liste.antall = til - fra;
-
-        return liste;
-    }
 
 
     public static <T> void sorter(Liste<T> liste, Comparator<? super T> c) {
