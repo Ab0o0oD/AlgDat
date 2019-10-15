@@ -507,8 +507,7 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
 
-    public static void fratilKontroll(int antall, int fra, int til)
-    {
+    public static void fratilKontroll(int antall, int fra, int til) {
         if (fra < 0)                                  // fra er negativ
             throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") er negativ!");
@@ -545,7 +544,6 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 }
             }
         }
-
     }
 
     @Override
