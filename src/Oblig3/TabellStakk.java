@@ -1,4 +1,4 @@
-package no.oslomet.cs.algdat.Oblig3;
+package Oblig3;
 
 import java.util.*;
 

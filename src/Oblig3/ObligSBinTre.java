@@ -1,8 +1,11 @@
-package no.oslomet.cs.algdat.Oblig3;
+package Oblig3;
 
 ////////////////// ObligSBinTre /////////////////////////////////
 
 import java.util.*;
+
+import java.lang.StringBuilder;
+
 
 public class ObligSBinTre<T> implements Beholder<T>
 {
@@ -42,12 +45,39 @@ public class ObligSBinTre<T> implements Beholder<T>
     antall = 0;
     comp = c;
   }
-  
-  @Override
-  public boolean leggInn(T verdi)
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
-  }
+
+    @Override
+    public boolean leggInn(T verdi) {
+
+        Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
+
+        Node<T> p = rot;
+        Node<T> q = null;
+
+        int cmp = 0;  // hjelpevariabel
+
+        while (p != null) {     // fortsetter til p er ute av treet
+            q = p;                                 // q er forelder til p
+            cmp = comp.compare(verdi, p.verdi);     // bruker komparatoren
+            p = cmp < 0 ? p.venstre : p.høyre;     // flytter p
+        }
+
+        p = new Node<T>(verdi, null, null, null);
+
+
+        if (q == null) {
+            rot = p;            // p blir rotnode om q == 0
+        } else if (cmp < 0) {
+            // q.venstre = p;
+            q.venstre = p;      // p blir venstre barn til q
+            p.forelder = q;     // p sin forelder blir q;
+        } else {
+            q.høyre = p;         // p blir høyre barn til q
+            p.forelder = q; // Og p sin forelder blir q venstre
+        }
+        this.antall++;                           // én verdi mer i treet
+        return true;                            // vellykket innlegging
+    }
   
   @Override
   public boolean inneholder(T verdi)
@@ -83,12 +113,30 @@ public class ObligSBinTre<T> implements Beholder<T>
   {
     return antall;
   }
-  
-  public int antall(T verdi)
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
-  }
-  
+
+    public int antall(T verdi) {
+
+        if (verdi == null) {
+            return 0; }
+
+        int count = 0;
+
+        Node<T> p = rot;
+
+        while (p != null) {
+            int cmp = comp.compare(verdi, p.verdi);
+            if (cmp < 0) {
+                p = p.venstre;
+            } else if (cmp > 0) {
+                p = p.høyre;
+            } else {
+                // DUPLIKATER GÅR ALLTID TIL HØYRE I TREET !!
+                count++;
+                p = p.høyre;
+            }
+        }
+        return count;
+    }
   @Override
   public boolean tom()
   {
@@ -188,12 +236,30 @@ public class ObligSBinTre<T> implements Beholder<T>
     return sb.toString();
 
     }
-  
-  
-  public String omvendtString()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
-  }
+
+
+    public String omvendtString() {
+        StringBuilder s = new StringBuilder();
+        s.append('[');
+        Stack stakk = new Stack();
+        Node p = finnLavesteVenstre(rot);
+        if(p != null){
+            stakk.push (p);
+            while (nesteInorden(p) != null) {
+                p = nesteInorden(p);
+                stakk.push (p);
+            }
+        }
+
+        while ( !stakk.empty() )
+        {
+            s.append( stakk.pop() );
+            if(!stakk.empty())
+                s.append(",").append(" ");
+        }
+        s.append(']');
+        return s.toString();
+    }
 
     //Oppgave 6a)
     public String høyreGren() {
