@@ -1,4 +1,4 @@
-package no.oslomet.cs.algdat.Oblig3;
+package Oblig3;
 
 public interface Stakk<T>          // eng: Stack
 {
