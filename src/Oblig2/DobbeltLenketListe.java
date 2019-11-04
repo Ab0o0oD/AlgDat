@@ -143,21 +143,21 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         }
 
 
-   public Liste<T> subliste(int fra, int til) {
-        fratilKontroll(antall, fra, til);
-        int antallElement = til - fra;
-        if(antallElement < 1) return new DobbeltLenketListe<>();
+    public Liste<T> subliste(int fra, int til){
+            fratilKontroll(antall, fra, til);
+            int antallElement = til - fra;
+            if(antallElement < 1) return new DobbeltLenketListe<>();
 
-        Node<T> current = finnNode(fra);
+            Node<T> current = finnNode(fra);
 
-        DobbeltLenketListe<T> subliste = new DobbeltLenketListe<>();
+            DobbeltLenketListe<T> subliste = new DobbeltLenketListe<>();
 
-        while(antallElement > 0) {
-            subliste.leggInn(current.verdi);
-            current = current.neste;
-            antallElement--;
-        }
-        return subliste;
+            while(antallElement > 0) {
+                subliste.leggInn(current.verdi);
+                current = current.neste;
+                antallElement--;
+            }
+            return subliste;
     }
 
     @Override
@@ -460,6 +460,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
            }         
         }
 
+
+
         @Override
         public void remove(){
             if (!fjernOK) throw
@@ -505,15 +507,17 @@ public class DobbeltLenketListe<T> implements Liste<T> {
 
 
 
-    public static void fratilKontroll(int antall, int fra, int til)
-    {
+    public static void fratilKontroll(int antall, int fra, int til) {
         if (fra < 0)                                  // fra er negativ
             throw new IndexOutOfBoundsException
                     ("fra(" + fra + ") er negativ!");
+        if (fra > til)                                  // fra er negativ
+            throw new IllegalArgumentException
+                    ("fra(" + fra + ") er større enn til!");
 
         if (til > antall)                          // til er utenfor tabellen
             throw new IndexOutOfBoundsException
-                    ("til(" + til + ") > tablengde(" + antall + ")");
+                    ("til(" + til + ") > antall(" + antall + ")");
 
         if (fra > antall)                                // fra er større enn til
             throw new IndexOutOfBoundsException
@@ -540,54 +544,10 @@ public class DobbeltLenketListe<T> implements Liste<T> {
                 }
             }
         }
-
     }
 
-
-
-
-
-    public static void main(String[] args) {
-        String [] n = {"aa","bb","cc","dd",null};
-        DobbeltLenketListe<String> list1= new DobbeltLenketListe<>(  n);
-        System.out.println("liste1:\n"+list1.toString());
-        long tid = System.currentTimeMillis();
-        list1.nullstill();
-        tid = System.currentTimeMillis() - tid;
-        System.out.println("første nullstill metode bruker tid: "+tid);
-        System.out.println(list1.toString());
-        System.out.println("+++++++++++++++++++++++++++");
-
-        DobbeltLenketListe<String> list2= new DobbeltLenketListe<>(  n);
-        System.out.println("liste2:\n"+list2.toString());
-        long tid2 = System.currentTimeMillis();
-        list2.nullstill2();
-        tid2 = System.currentTimeMillis() - tid2;
-        System.out.println("andre nullstill metode bruker tid: "+tid2 );
-        System.out.println(list2.toString());
-    }
     @Override
-    public void nullstill() {
-
-        //første metode:
-        Node<T> p = hode;
-        Node<T> q;
-
-        while (p != null) {
-            q = p.neste;
-            p.verdi = null;
-            p.forrige = null;
-            p.neste = null;
-            p = q;
-        }
-
-        hode = hale = null;
-        antall = 0;
-        endringer++;
-
-
-    }
-    public void nullstill2 (){
+    public void nullstill (){
 
 
         Node<T> p = hode;
@@ -602,6 +562,8 @@ public class DobbeltLenketListe<T> implements Liste<T> {
         endringer++;
 
     }
+
+
 
 
 } // class DobbeltLenketListe
