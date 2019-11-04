@@ -194,21 +194,151 @@ public class ObligSBinTre<T> implements Beholder<T>
   {
     throw new UnsupportedOperationException("Ikke kodet ennå!");
   }
-  
-  public String høyreGren()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
-  }
-  
-  public String lengstGren()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
-  }
-  
-  public String[] grener()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
-  }
+
+    //Oppgave 6a)
+    public String høyreGren() {
+        StringBuilder ut = new StringBuilder();
+        ut.append("[");
+        Node<T> current = rot;
+
+        if(tom()){
+            ut.append("]");
+        }
+        else{
+            ut.append(current.verdi);
+            while(current.høyre != null || current.venstre != null){
+                if(current.høyre != null) { //Går til høyre for å få den høyre grenen
+                    current = current.høyre;
+                    ut.append(",").append(" ").append(current.verdi);
+                }
+                else if(current.venstre != null){
+                    current = current.venstre;
+                    ut.append(",").append(" ").append(current.verdi);
+                }
+            }
+            ut.append("]");
+        }
+        return ut.toString();
+    }
+
+    //Hjelpemetode til oppgave 6b)
+    private void lengstgren(Node<T> node, int[] lengstGrenSize, String[] lengstGren, ArrayDeque<T> gren)
+    {
+        gren.addLast(node.verdi);  //Legger inn første verdi bakerst
+
+        if (node.høyre == null && node.venstre == null) {
+            if (gren.size() > lengstGrenSize[0]){  //Dersom den nye grenen sin lengde er lenger enn den hittil lengste
+                lengstGrenSize[0] = gren.size();   //Sett den ny grenen til sin lengde til å være lengst
+                lengstGren[0] = gren.toString();   //Legger inn hele grenen i lengstGren-arrayet
+            }
+        }
+        else {                              //Kjører rekursjon for å finne gå igjennom treet
+            if (node.venstre != null){
+                lengstgren(node.venstre, lengstGrenSize, lengstGren, gren);
+            }
+            if (node.høyre != null){
+                lengstgren(node.høyre, lengstGrenSize, lengstGren, gren);
+            }
+        }
+        gren.removeLast();  //Fjerner siste verdi
+    }
+
+    //Oppgave 6b)
+    public String lengstGren(){
+        if (tom()){
+            return "[]";
+        }
+        int[] lengstGrenSize = {0}; //Holder rede på lengden til den lengste grenen hittil
+        String[] lengstGren = {null}; //Her legges verdiene til den lengste grenen inn fra gren dequen
+        ArrayDeque<T> gren = new ArrayDeque<>(); //Deque som tar vare på verdiene i en gren
+        lengstgren(rot,lengstGrenSize,lengstGren,gren);
+        return lengstGren[0];
+    }
+
+    //Oppgave 7
+    public String[] grener() {
+        return finnGrener(rot);
+    }
+
+    public String[] finnGrener(Node<T> p)
+    {
+        ArrayDeque<String> grenListe = new ArrayDeque<>();
+        String grenStreng = "";
+
+        String[] tomStreng = {};
+
+        if (p == null)
+        {
+            return tomStreng;
+        }
+
+        else
+        {
+            grenListe = finnAlleGrener(p, grenListe, grenStreng, 0);
+        }
+
+        int antallGrener = grenListe.size();
+        String[] sluttStrenger = new String[antallGrener];
+        sluttStrenger = tilStringArray(grenListe, sluttStrenger);
+        return sluttStrenger;
+    }
+
+    public String[] tilStringArray(ArrayDeque<String> grenListe, String[] sluttStrenger)
+    {
+
+        int antallGrener = grenListe.size();
+        int i = antallGrener - 1;
+
+        for(String gren : grenListe)
+        {
+            sluttStrenger[i] = gren;
+            i--;
+        }
+
+        return sluttStrenger;
+    }
+
+    public ArrayDeque finnAlleGrener(Node<T> p, ArrayDeque<String> stringListe, String grenStreng, int teller)
+    {
+        ArrayDeque<T> tempListe = new ArrayDeque<>();
+
+        if (p == null)
+        {
+            return stringListe;
+        }
+        else if (p.venstre == null && p.høyre == null)
+        {
+            if (teller == 0)
+            {
+                grenStreng = "[" + grenStreng + p.toString() + "]";
+            }
+            else
+            {
+                grenStreng = grenStreng + ", " + p.toString() + "]";
+            }
+            stringListe.addFirst(grenStreng);
+            return stringListe;
+
+        }
+        else
+        {
+            if (teller == 0)
+            {
+                grenStreng = grenStreng + "[" + p.toString();
+            }
+            else
+            {
+                grenStreng = grenStreng + ", " + p.toString();
+            }
+            teller = teller + 1;
+
+            stringListe = finnAlleGrener(p.venstre, stringListe, grenStreng, teller);
+
+            stringListe = finnAlleGrener(p.høyre, stringListe, grenStreng, teller);
+        }
+
+        return stringListe;
+    }
   
   public String bladnodeverdier()
   {
