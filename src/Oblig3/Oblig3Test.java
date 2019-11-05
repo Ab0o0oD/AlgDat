@@ -1,4 +1,4 @@
-package no.oslomet.cs.algdat.Oblig3;
+package Oblig3;
 
 
 ////// Testprogram for Oblig 3 - 2019 ////////////////////////
@@ -26,7 +26,7 @@ public class Oblig3Test {
     @org.junit.jupiter.api.Test
     void oppgave1() {
         int antallFeil = 0;
-        no.oslomet.cs.algdat.Oblig3.ObligSBinTre<Integer> tre =
+        Oblig3.ObligSBinTre<Integer> tre =
                 new ObligSBinTre<>(Comparator.naturalOrder());
 
         try {
@@ -57,7 +57,7 @@ public class Oblig3Test {
     // OPPGAVE 2 ////////////////////////////////////////////////
     @org.junit.jupiter.api.Test
     void oppgave2() {
-        no.oslomet.cs.algdat.Oblig3.ObligSBinTre<Integer> tre =
+        Oblig3.ObligSBinTre<Integer> tre =
                 new ObligSBinTre<>(Comparator.naturalOrder());
 
         int antallFeil = 0;
@@ -97,7 +97,7 @@ public class Oblig3Test {
     @org.junit.jupiter.api.Test
     void oppgave3() {
         int antallFeil = 0;
-        no.oslomet.cs.algdat.Oblig3.ObligSBinTre<Integer> tre =
+        Oblig3.ObligSBinTre<Integer> tre =
                 new ObligSBinTre<>(Comparator.naturalOrder());
 
         String s;
@@ -174,7 +174,7 @@ public class Oblig3Test {
     void oppgave4() {
         int antallFeil = 0;
 
-        no.oslomet.cs.algdat.Oblig3.ObligSBinTre<Integer> tre =
+        Oblig3.ObligSBinTre<Integer> tre =
                 new ObligSBinTre<>(Comparator.naturalOrder());
 
         String s;
@@ -217,7 +217,7 @@ public class Oblig3Test {
     void oppgave5() {
         int antallFeil = 0;
 
-        no.oslomet.cs.algdat.Oblig3.ObligSBinTre<Integer> tre =
+        Oblig3.ObligSBinTre<Integer> tre =
                 new ObligSBinTre<>(Comparator.naturalOrder());
 
         String s;
@@ -406,7 +406,7 @@ public class Oblig3Test {
     void oppgave6() {
         int antallFeil = 0;
 
-        no.oslomet.cs.algdat.Oblig3.ObligSBinTre<Integer> tre =
+        Oblig3.ObligSBinTre<Integer> tre =
                 new ObligSBinTre<>(Comparator.naturalOrder());
 
         String s = null;
@@ -466,7 +466,7 @@ public class Oblig3Test {
         }
 
         // Et nytt tre
-        no.oslomet.cs.algdat.Oblig3.ObligSBinTre<String> tre2 =
+        Oblig3.ObligSBinTre<String> tre2 =
                 new ObligSBinTre<>(Comparator.naturalOrder());
 
         try {
@@ -512,7 +512,7 @@ public class Oblig3Test {
     void oppgave7() {
         int antallFeil = 0;
 
-        no.oslomet.cs.algdat.Oblig3.ObligSBinTre<Integer> tre =
+        Oblig3.ObligSBinTre<Integer> tre =
                 new ObligSBinTre<>(Comparator.naturalOrder());
 
         String[] s = tre.grener();
@@ -572,7 +572,7 @@ public class Oblig3Test {
     void oppgave8() {
         int antallFeil = 0;
 
-        no.oslomet.cs.algdat.Oblig3.ObligSBinTre<Integer> tre =
+        Oblig3.ObligSBinTre<Integer> tre =
                 new ObligSBinTre<>(Comparator.naturalOrder());
 
         String s = tre.bladnodeverdier();
@@ -684,7 +684,7 @@ public class Oblig3Test {
     void oppgave9() {
         int antallFeil = 0;
 
-        no.oslomet.cs.algdat.Oblig3.ObligSBinTre<Integer> tre =
+        Oblig3.ObligSBinTre<Integer> tre =
                 new ObligSBinTre<>(Comparator.naturalOrder());
 
         Iterator<Integer> i = tre.iterator();
@@ -822,7 +822,7 @@ public class Oblig3Test {
     void oppgave10() {
         int antallFeil = 0;
 
-        no.oslomet.cs.algdat.Oblig3.ObligSBinTre<Integer> tre =
+        Oblig3.ObligSBinTre<Integer> tre =
                 new ObligSBinTre<>(Comparator.naturalOrder());
 
         Iterator<Integer> i = tre.iterator();
