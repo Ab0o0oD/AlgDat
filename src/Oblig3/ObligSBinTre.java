@@ -460,17 +460,85 @@ public class ObligSBinTre<T> implements Beholder<T>
 
         return stringListe;
     }
-  
-  public String bladnodeverdier()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
-  }
-  
-  public String postString()
-  {
-    throw new UnsupportedOperationException("Ikke kodet ennå!");
-  }
-  
+
+
+    //Oppgave8:
+    //a)
+
+    public String bladnodeverdier() {
+
+        StringJoiner s = new StringJoiner(", ", "[",  "]");
+
+        Node p = rot;
+        if (rot == null){
+            return s.toString ();
+
+        }
+
+        TabellStakk<Node> stakk = new TabellStakk<> () ;
+        stakk.leggInn (p);
+        while (!stakk.tom ()){
+            Node q = stakk.taUt ();
+
+            if (q.høyre != null){
+                stakk.leggInn (q.høyre);
+            }
+            if(q.venstre != null){
+                stakk.leggInn (q.venstre);
+            } if (q.venstre == null && q.høyre == null){
+                s.add (q.verdi.toString ());
+
+
+            }
+        }
+        return s.toString ();
+    }
+
+
+
+    //8.b)
+
+    public String postString() {
+
+
+        StringJoiner s = new StringJoiner(", ", "[",  "]");
+
+
+        Node p = rot;
+        if (rot == null){
+            return s.toString ();
+
+        }
+        TabellStakk<Node> stakk = new TabellStakk<> () ;
+        stakk.leggInn (p);
+
+        while (!stakk.tom ()){
+
+            Node q = stakk.kikk ();
+
+            if (q.høyre == null && q.venstre == null){
+                Node r = stakk.taUt ();
+
+                if (r.verdi != null) {
+
+                    s.add (r.verdi.toString ());
+
+                }
+            }
+            else{
+                if(q.høyre != null){
+                    stakk.leggInn (q.høyre);
+                    q.høyre = null;
+                }
+                if (q.venstre !=null){
+                    stakk.leggInn (q.venstre);
+                    q.venstre=null;
+                }
+            }
+        }
+
+        return s.toString ();
+    }
   @Override
   public Iterator<T> iterator()
   {
