@@ -76,6 +76,7 @@ public class ObligSBinTre<T> implements Beholder<T>
             p.forelder = q; // Og p sin forelder blir q venstre
         }
         this.antall++;                           // én verdi mer i treet
+        endringer++;
         return true;                            // vellykket innlegging
     }
   
@@ -138,9 +139,9 @@ public class ObligSBinTre<T> implements Beholder<T>
               s.høyre = r.høyre;
               r.høyre.forelder = s;
           }
+          endringer++;
       }
       antall--;
-      endringer++;
       return true;
   }
 
